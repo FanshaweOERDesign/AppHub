@@ -48,6 +48,12 @@ SOFTWARE.
                     mainFrame.style.height = "100vh";
                 }
 
+                // Get copied text from H5P Description Generator
+                window.addEventListener("message", (event) => {
+                  if (event.origin !== "https://h5p-text-description-generator-production.up.railway.app") return; // validate origin for security
+                  const content = event.data.content;
+                  navigator.clipboard.writeText(content);
+                });
                 const menu = document.getElementById("menu");
                 menu.addEventListener("change", appChange);
             }
