@@ -45,7 +45,9 @@ SOFTWARE.
                         url = `https://fanshaweoerdesign.github.io/${e.target.value}/`;
                     }
                     mainFrame.src = url;
-                    mainFrame.style.height = "100vh";
+                    mainFrame.style.height = "calc(96vh - 15px)";
+                    // mainFrame.style.height = "100vh";
+
                 }
 
                 // Get copied text from H5P Description Generator
@@ -65,12 +67,23 @@ SOFTWARE.
                 background-size: cover;
                 font-family: Arial, sans-serif;
                 margin: 0;
+                animation: grow 1s;
+                background-position: center center;
+            }
+
+            @keyframes grow {
+                0% {
+                    background-size: 70% auto;
+                }
+                100% {
+                    background-size: 100% auto;
+                }
             }
             
             #top-bar, #menu, #menu option {
                 background-color: #333;
                 color: white;
-                height: 2rem;
+                height: 4vh;
                 margin-top: 0;
             }
 
@@ -80,7 +93,7 @@ SOFTWARE.
 
             #main-frame {
                 width: 100%;
-                height: 100vh;
+                height: calc(96vh - 15px);
                 overflow: hidden;
                 border: none;
             }
@@ -89,7 +102,7 @@ SOFTWARE.
     </head>
     <body onload="startup();">
         <div id="top-bar">
-            <span style="padding-right: 2rem">Fanshawe OER Design Studio App Hub</span>
+            <span style="padding-right: 2rem"><a style="text-decoration: none; color: white;" href="index.html"><b>Fanshawe OER Design Studio</b> App Hub</a></span>
             <select id="menu">
                 <option value="" disabled selected>-- select an app --</option>
                 <option value="HTML-Scrubber">HTML Scrubber</option>
