@@ -34,21 +34,35 @@ SOFTWARE.
         <![endif]-->
         <script>
             const startup = () => {
+                const appShell = document.querySelector(".app-shell");
+                const mainFrame = document.getElementById("main-frame");
+                const appButtons = document.querySelectorAll(".app-button");
+                const homeButtons = document.querySelectorAll(".home-app-button");
 
-                const appChange = (e) => {
-
-                    const mainFrame = document.getElementById("main-frame");
-                    let url = '';
-                    if (e.target.value.indexOf('http') === 0){
-                        url = e.target.value;
+                const openApp = (value) => {
+                    let url = "";
+                    if (value.indexOf("http") === 0) {
+                        url = value;
                     } else {
-                        url = `https://fanshaweoerdesign.github.io/${e.target.value}/`;
+                        url = `https://fanshaweoerdesign.github.io/${value}/`;
                     }
                     mainFrame.src = url;
-                    mainFrame.style.height = "calc(96vh - 15px)";
-                    // mainFrame.style.height = "100vh";
+                };
 
-                }
+                const appChange = (e) => {
+                    const button = e.currentTarget;
+                    const { appUrl } = button.dataset;
+                    openApp(appUrl);
+                    appShell.classList.add("app-open");
+
+                    appButtons.forEach((appButton) => {
+                        appButton.classList.toggle("active", appButton.dataset.appUrl === appUrl);
+                    });
+
+                    homeButtons.forEach((homeButton) => {
+                        homeButton.classList.toggle("active", homeButton.dataset.appUrl === appUrl);
+                    });
+                };
 
                 // Get copied text from H5P Description Generator
                 window.addEventListener("message", (event) => {
@@ -56,19 +70,42 @@ SOFTWARE.
                   const content = event.data.content;
                   navigator.clipboard.writeText(content);
                 });
-                const menu = document.getElementById("menu");
-                menu.addEventListener("change", appChange);
+
+                appButtons.forEach((button) => {
+                    button.addEventListener("click", appChange);
+                });
+
+                homeButtons.forEach((button) => {
+                    button.addEventListener("click", appChange);
+                });
             }
         </script>
         <style>
+            :root {
+                --sidebar-width: 18rem;
+                --sidebar-bg: rgba(24, 24, 24, 0.92);
+                --sidebar-border: rgba(255, 255, 255, 0.14);
+                --button-bg: rgba(255, 255, 255, 0.08);
+                --button-hover: rgba(255, 255, 255, 0.16);
+                --button-active: #c41230;
+                --text-main: #ffffff;
+                --text-muted: rgba(255, 255, 255, 0.72);
+                --frame-bg: rgba(255, 255, 255, 0.92);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
             body {
-                min-width: 250px;
                 background-image: url(images/fanshawe_wallpaper.jpg);
                 background-size: cover;
                 font-family: Arial, sans-serif;
                 margin: 0;
                 animation: grow 1s;
                 background-position: center center;
+                min-height: 100vh;
+                color: var(--text-main);
             }
 
             @keyframes grow {
@@ -79,52 +116,299 @@ SOFTWARE.
                     background-size: 100% auto;
                 }
             }
-            
-            #top-bar, #menu, #menu option {
-                background-color: #333;
-                color: white;
-                height: 4vh;
-                margin-top: 0;
+
+            .app-shell {
+                display: flex;
+                min-height: 100vh;
+                backdrop-filter: blur(2px);
             }
 
-            #top-bar {
-                padding: 5px;
+            .app-shell:not(.app-open) .sidebar {
+                display: none;
+            }
+
+            .sidebar {
+                width: var(--sidebar-width);
+                background: var(--sidebar-bg);
+                border-right: 1px solid var(--sidebar-border);
+                padding: 1.5rem 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                height: 100vh;
+                overflow-y: auto;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.22);
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+            }
+
+            .sidebar::-webkit-scrollbar {
+                width: 0.75rem;
+            }
+
+            .sidebar::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .sidebar::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+                border-radius: 999px;
+                border: 0.18rem solid transparent;
+                background-clip: padding-box;
+            }
+
+            .sidebar::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.18));
+                border-radius: 999px;
+                border: 0.18rem solid transparent;
+                background-clip: padding-box;
+            }
+
+            .brand {
+                padding: 0.25rem 0.5rem 0.75rem;
+                border-bottom: 1px solid var(--sidebar-border);
+            }
+
+            .brand a {
+                text-decoration: none;
+                color: var(--text-main);
+            }
+
+            .brand-title {
+                display: block;
+                font-size: 0.95rem;
+                font-weight: 700;
+                line-height: 1.3;
+            }
+
+            .brand-subtitle {
+                display: block;
+                margin-top: 0.35rem;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                letter-spacing: 0.02em;
+            }
+
+            .app-nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.55rem;
+                overflow-y: auto;
+                padding-right: 0.3rem;
+            }
+
+            .app-button {
+                width: 100%;
+                border: none;
+                border-radius: 0.85rem;
+                background: var(--button-bg);
+                color: var(--text-main);
+                text-align: left;
+                padding: 0.85rem 0.95rem;
+                font-size: 0.97rem;
+                cursor: pointer;
+                transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .app-button:hover,
+            .app-button:focus-visible {
+                background: var(--button-hover);
+                transform: translateX(3px);
+                outline: none;
+            }
+
+            .app-button.active {
+                background: var(--button-active);
+                box-shadow: 0 10px 24px rgba(196, 18, 48, 0.28);
+            }
+
+            .content-panel {
+                flex: 1;
+                padding: 1rem;
+                overflow: hidden;
+                display: flex;
             }
 
             #main-frame {
                 width: 100%;
-                height: calc(96vh - 15px);
+                height: calc(100vh - 2rem);
+                display: block;
                 overflow: hidden;
                 border: none;
+                border-radius: 1.1rem;
+                background: transparent;
+                box-shadow: 0 22px 50px rgba(0, 0, 0, 0.18);
             }
-            
+
+            .app-shell:not(.app-open) #main-frame {
+                display: none;
+            }
+
+            .home-view {
+                width: 100%;
+                min-height: calc(100vh - 2rem);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+            }
+
+            .app-shell.app-open .home-view {
+                display: none;
+            }
+
+            .home-card {
+                width: min(64rem, 100%);
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .home-logo {
+                width: 8rem;
+                max-width: 32vw;
+                display: block;
+                margin: 0 auto 1.25rem;
+                filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.35));
+            }
+
+            .home-title {
+                margin: 0;
+                font-size: 2rem;
+                line-height: 1.1;
+                text-shadow: 0 4px 18px rgba(0, 0, 0, 0.32);
+            }
+
+            .home-subtitle {
+                margin: 0.75rem auto 2rem;
+                max-width: 40rem;
+                color: var(--text-muted);
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .home-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+                gap: 0.9rem;
+            }
+
+            .home-app-button {
+                border: none;
+                border-radius: 1rem;
+                background: rgba(24, 24, 24, 0.84);
+                color: var(--text-main);
+                text-align: left;
+                padding: 1rem 1.05rem;
+                font-size: 0.98rem;
+                cursor: pointer;
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .home-app-button:hover,
+            .home-app-button:focus-visible {
+                background: rgba(24, 24, 24, 0.94);
+                transform: translateY(-2px);
+                box-shadow: 0 18px 34px rgba(0, 0, 0, 0.25);
+                outline: none;
+            }
+
+            .home-app-button.active {
+                background: var(--button-active);
+            }
+
+            @media (max-width: 900px) {
+                .app-shell {
+                    flex-direction: column;
+                }
+
+                .sidebar {
+                    width: 100%;
+                    height: auto;
+                    border-right: none;
+                    border-bottom: 1px solid var(--sidebar-border);
+                }
+
+                .app-nav {
+                    max-height: 16rem;
+                }
+
+                .content-panel {
+                    padding-top: 0.75rem;
+                }
+
+                #main-frame {
+                    height: calc(100vh - 22rem);
+                    min-height: 24rem;
+                }
+
+                .home-card {
+                    padding: 1rem 0.25rem 2rem;
+                }
+
+                .home-title {
+                    font-size: 1.6rem;
+                }
+            }
         </style>
     </head>
     <body onload="startup();">
-        <div id="top-bar">
-            <span style="padding-right: 2rem"><a style="text-decoration: none; color: white;" href="index.html"><b>Fanshawe OER Design Studio</b> App Hub</a></span>
-            <select id="menu">
-                <option value="" disabled selected>-- select an app --</option>
-                
-                <option value="AccordionBuilder">Accordion Builder</option>
-                <option value="alt-text-advisor">Alt Text Advisor</option>
-                <option value="AttributionBuilder-Online">AttributionBuilder</option>
-                <option value="BoxChartBuilder">Box Chart Builder</option>
-                <option value="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/">DOCX to HTML Converter</option>
-                <option value="docx2pb-xml">DOCX to PressbooksXML Converter</option>
-                <option value="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3">H5P Description Generator</option>
-                <option value="h5p-dialog-card-generator">H5P Dialog Card Generator</option>
-                <option value="HTML-Scrubber">HTML Scrubber</option>
-                <option value="https://pressbooks-image-attributionbuilder-production.up.railway.app/">Image Attribution Builder</option>
-                <option value="inaturalist-attribution-builder">iNaturalist Attribution Builder</option>
-                <option value="https://openstax-to-pressbooks-xml-production.up.railway.app/">OpenStax to Pressbooks XML</option>
-                <option value="https://openstax-image-importer-production.up.railway.app/">OpenStax Image Importer</option>
-                <option value="Pressbooks-PDF-LaTeX-Fixer">PDF LaTeX Fixer</option>
-                <option value="ReferencesFormatter">References Formatter</option>
-                <option value="Textbox-Builder">Textbox Builder</option>
-            </select>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand">
+                    <a href="index.html">
+                        <span class="brand-title">Fanshawe OER Design Studio</span>
+                        <span class="brand-subtitle">App Hub</span>
+                    </a>
+                </div>
+                <nav class="app-nav" aria-label="Applications">
+                    <button class="app-button" type="button" data-app-url="AccordionBuilder">Accordion Builder</button>
+                    <button class="app-button" type="button" data-app-url="alt-text-advisor">Alt Text Advisor</button>
+                    <button class="app-button" type="button" data-app-url="AttributionBuilder-Online">AttributionBuilder</button>
+                    <button class="app-button" type="button" data-app-url="BoxChartBuilder">Box Chart Builder</button>
+                    <button class="app-button" type="button" data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/">DOCX to HTML Converter</button>
+                    <button class="app-button" type="button" data-app-url="docx2pb-xml">DOCX to PressbooksXML Converter</button>
+                    <button class="app-button" type="button" data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3">H5P Description Generator</button>
+                    <button class="app-button" type="button" data-app-url="h5p-dialog-card-generator">H5P Dialog Card Generator</button>
+                    <button class="app-button" type="button" data-app-url="HTML-Scrubber">HTML Scrubber</button>
+                    <button class="app-button" type="button" data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/">Image Attribution Builder</button>
+                    <button class="app-button" type="button" data-app-url="inaturalist-attribution-builder">iNaturalist Attribution Builder</button>
+                    <button class="app-button" type="button" data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/">OpenStax to Pressbooks XML</button>
+                    <button class="app-button" type="button" data-app-url="https://openstax-image-importer-production.up.railway.app/">OpenStax Image Importer</button>
+                    <button class="app-button" type="button" data-app-url="Pressbooks-PDF-LaTeX-Fixer">PDF LaTeX Fixer</button>
+                    <button class="app-button" type="button" data-app-url="ReferencesFormatter">References Formatter</button>
+                    <button class="app-button" type="button" data-app-url="Textbox-Builder">Textbox Builder</button>
+                </nav>
+            </aside>
+            <main class="content-panel">
+                <section class="home-view" aria-label="App Hub home">
+                    <div class="home-card">
+                        <img class="home-logo" src="images/oer_logo.png" alt="Fanshawe OER Design Studio logo" />
+                        <h1 class="home-title">Fanshawe OER Design Studio App Hub</h1>
+                        <p class="home-subtitle">Choose a tool to launch it in the workspace. Once opened, you can keep switching between apps from the sidebar.</p>
+                        <div class="home-grid">
+                            <button class="home-app-button" type="button" data-app-url="AccordionBuilder">Accordion Builder</button>
+                            <button class="home-app-button" type="button" data-app-url="alt-text-advisor">Alt Text Advisor</button>
+                            <button class="home-app-button" type="button" data-app-url="AttributionBuilder-Online">AttributionBuilder</button>
+                            <button class="home-app-button" type="button" data-app-url="BoxChartBuilder">Box Chart Builder</button>
+                            <button class="home-app-button" type="button" data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/">DOCX to HTML Converter</button>
+                            <button class="home-app-button" type="button" data-app-url="docx2pb-xml">DOCX to PressbooksXML Converter</button>
+                            <button class="home-app-button" type="button" data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3">H5P Description Generator</button>
+                            <button class="home-app-button" type="button" data-app-url="h5p-dialog-card-generator">H5P Dialog Card Generator</button>
+                            <button class="home-app-button" type="button" data-app-url="HTML-Scrubber">HTML Scrubber</button>
+                            <button class="home-app-button" type="button" data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/">Image Attribution Builder</button>
+                            <button class="home-app-button" type="button" data-app-url="inaturalist-attribution-builder">iNaturalist Attribution Builder</button>
+                            <button class="home-app-button" type="button" data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/">OpenStax to Pressbooks XML</button>
+                            <button class="home-app-button" type="button" data-app-url="https://openstax-image-importer-production.up.railway.app/">OpenStax Image Importer</button>
+                            <button class="home-app-button" type="button" data-app-url="Pressbooks-PDF-LaTeX-Fixer">PDF LaTeX Fixer</button>
+                            <button class="home-app-button" type="button" data-app-url="ReferencesFormatter">References Formatter</button>
+                            <button class="home-app-button" type="button" data-app-url="Textbox-Builder">Textbox Builder</button>
+                        </div>
+                    </div>
+                </section>
+                <iframe id="main-frame" src="about:blank" title="App viewer"></iframe>
+            </main>
         </div>
-        <iframe id="main-frame" src="placeholder.html"></iframe>
     </body>
 </html>
 
