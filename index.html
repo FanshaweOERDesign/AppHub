@@ -263,6 +263,11 @@ SOFTWARE.
                 padding: 2rem 1.5rem;
             }
 
+            .home-logo-link {
+                display: inline-block;
+                text-decoration: none;
+            }
+
             .home-logo {
                 width: 8rem;
                 max-width: 32vw;
@@ -383,7 +388,9 @@ SOFTWARE.
             <main class="content-panel">
                 <section class="home-view" aria-label="App Hub home">
                     <div class="home-card">
-                        <img class="home-logo" src="images/oer_logo.png" alt="Fanshawe OER Design Studio logo" />
+                        <a class="home-logo-link" href="index.html" aria-label="Reload App Hub home">
+                            <img class="home-logo" src="images/oer_logo.png" alt="Fanshawe OER Design Studio logo" />
+                        </a>
                         <h1 class="home-title">Fanshawe OER Design Studio App Hub</h1>
                         <p class="home-subtitle">Choose a tool to launch it in the workspace. Once opened, you can keep switching between apps from the sidebar.</p>
                         <div class="home-grid">
