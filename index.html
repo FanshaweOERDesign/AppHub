@@ -78,6 +78,11 @@ SOFTWARE.
                 homeButtons.forEach((button) => {
                     button.addEventListener("click", appChange);
                 });
+
+                const homeReloadButton = document.getElementById("home-reload");
+                homeReloadButton.addEventListener("click", () => {
+                    window.location.reload();
+                });
             }
         </script>
         <style>
@@ -263,9 +268,12 @@ SOFTWARE.
                 padding: 2rem 1.5rem;
             }
 
-            .home-logo-link {
+            .home-logo-button {
                 display: inline-block;
-                text-decoration: none;
+                padding: 0;
+                border: none;
+                background: transparent;
+                cursor: pointer;
             }
 
             .home-logo {
@@ -388,9 +396,9 @@ SOFTWARE.
             <main class="content-panel">
                 <section class="home-view" aria-label="App Hub home">
                     <div class="home-card">
-                        <a class="home-logo-link" href="index.html" aria-label="Reload App Hub home">
+                        <button class="home-logo-button" id="home-reload" type="button" aria-label="Reload App Hub home">
                             <img class="home-logo" src="images/oer_logo.png" alt="Fanshawe OER Design Studio logo" />
-                        </a>
+                        </button>
                         <h1 class="home-title">Fanshawe OER Design Studio App Hub</h1>
                         <p class="home-subtitle">Choose a tool to launch it in the workspace. Once opened, you can keep switching between apps from the sidebar.</p>
                         <div class="home-grid">
