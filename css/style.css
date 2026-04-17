@@ -15,7 +15,7 @@
 }
 
 body {
-    background-image: url(../images/fanshawe_wallpaper.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../images/fanshawe_wallpaper.jpg);
     background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
