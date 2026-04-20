@@ -99,12 +99,13 @@ body {
     border-bottom: 1px solid var(--sidebar-border);
 }
 
-.brand a {
+.brand .side-menu-reload {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
     color: var(--text-main);
+    cursor: pointer;
 }
 
 .brand-logo {
