@@ -1,4 +1,4 @@
-<!doctype HTML>
+<!doctype html>
 <!--
 MIT License
 
@@ -23,95 +23,315 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>AppHub - Fanshawe OER Design Studio</title>
-        <meta author="Jason Benoit">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="images/oer_logo.ico" />
-        <link rel="stylesheet" href="css/style.css" />
-        <!--[if lt IE 9]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <script src="js/index.js"></script>
-    </head>
-    <body onload="startup();">
-        <div class="app-shell">
-            <aside class="sidebar">
-                <button class="sidebar-close" id="close-sidebar" type="button" aria-label="Close menu">Close</button>
-                <div class="brand" data-reload-home>
-                    <span class="side-menu-reload">
-                        <img class="brand-logo" src="images/oer_logo.png" alt="" />
-                        <span class="brand-text">
-                            <span class="brand-title">
-                                <span class="brand-title-main">Fanshawe</span>
-                                <span class="brand-title-sub">OER Design Studio</span>
-                            </span>
-                            <span class="brand-subtitle">App Hub</span>
-                        </span>
-                    </span>
-                </div>
-                <nav class="app-nav" aria-label="Applications">
-                    <button class="app-button" type="button" data-app-url="AccordionBuilder">Accordion Builder</button>
-                    <button class="app-button" type="button" data-app-url="alt-text-advisor">Alt Text Advisor</button>
-                    <button class="app-button" type="button" data-app-url="AttributionBuilder-Online">AttributionBuilder</button>
-                    <button class="app-button" type="button" data-app-url="BoxChartBuilder">Box Chart Builder</button>
-                    <button class="app-button" type="button" data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/">DOCX to HTML Converter</button>
-                    <button class="app-button" type="button" data-app-url="docx2pb-xml">DOCX to PressbooksXML Converter</button>
-                    <button class="app-button" type="button" data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3">H5P Description Generator</button>
-                    <button class="app-button" type="button" data-app-url="h5p-dialog-card-generator">H5P Dialog Card Generator</button>
-                    <button class="app-button" type="button" data-app-url="HTML-Scrubber">HTML Scrubber</button>
-                    <button class="app-button" type="button" data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/">Image Attribution Builder</button>
-                    <button class="app-button" type="button" data-app-url="inaturalist-attribution-builder">iNaturalist Attribution Builder</button>
-                    <button class="app-button" type="button" data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/">OpenStax to Pressbooks XML</button>
-                    <button class="app-button" type="button" data-app-url="https://openstax-image-importer-production.up.railway.app/">OpenStax Image Importer</button>
-                    <button class="app-button" type="button" data-app-url="Pressbooks-PDF-LaTeX-Fixer">PDF LaTeX Fixer</button>
-                    <button class="app-button" type="button" data-app-url="ReferencesFormatter">References Formatter</button>
-                    <button class="app-button" type="button" data-app-url="Textbox-Builder">Textbox Builder</button>
-                </nav>
-            </aside>
-            <main class="content-panel">
-                <div class="mobile-topbar">
-                    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open app menu">Menu</button>
-                    <button class="mobile-title-button" type="button" data-reload-home aria-label="Reload App Hub home">
-                        <img class="mobile-logo" src="images/oer_logo.png" alt="" />
-                        <span class="mobile-title">Fanshawe OER Design Studio App Hub</span>
-                    </button>
-                </div>
-                <section class="home-view" aria-label="App Hub home">
-                    <div class="home-card">
-                        <button class="home-logo-button" type="button" data-reload-home aria-label="Reload App Hub home">
-                            <img class="home-logo" src="images/oer_logo.png" alt="Fanshawe OER Design Studio logo" />
-                        </button>
-                        <h1 class="home-title">Fanshawe OER Design Studio App Hub</h1>
-                        <p class="home-subtitle">Choose a tool to launch it in the workspace. Once opened, you can keep switching between apps from the sidebar.</p>
-                        <div class="home-grid">
-                            <button class="home-app-button" type="button" data-app-url="AccordionBuilder">Accordion Builder</button>
-                            <button class="home-app-button" type="button" data-app-url="alt-text-advisor">Alt Text Advisor</button>
-                            <button class="home-app-button" type="button" data-app-url="AttributionBuilder-Online">AttributionBuilder</button>
-                            <button class="home-app-button" type="button" data-app-url="BoxChartBuilder">Box Chart Builder</button>
-                            <button class="home-app-button" type="button" data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/">DOCX to HTML Converter</button>
-                            <button class="home-app-button" type="button" data-app-url="docx2pb-xml">DOCX to PressbooksXML Converter</button>
-                            <button class="home-app-button" type="button" data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3">H5P Description Generator</button>
-                            <button class="home-app-button" type="button" data-app-url="h5p-dialog-card-generator">H5P Dialog Card Generator</button>
-                            <button class="home-app-button" type="button" data-app-url="HTML-Scrubber">HTML Scrubber</button>
-                            <button class="home-app-button" type="button" data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/">Image Attribution Builder</button>
-                            <button class="home-app-button" type="button" data-app-url="inaturalist-attribution-builder">iNaturalist Attribution Builder</button>
-                            <button class="home-app-button" type="button" data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/">OpenStax to Pressbooks XML</button>
-                            <button class="home-app-button" type="button" data-app-url="https://openstax-image-importer-production.up.railway.app/">OpenStax Image Importer</button>
-                            <button class="home-app-button" type="button" data-app-url="Pressbooks-PDF-LaTeX-Fixer">PDF LaTeX Fixer</button>
-                            <button class="home-app-button" type="button" data-app-url="ReferencesFormatter">References Formatter</button>
-                            <button class="home-app-button" type="button" data-app-url="Textbox-Builder">Textbox Builder</button>
-                        </div>
-                    </div>
-                </section>
-                <iframe id="main-frame" src="about:blank" title="App viewer"></iframe>
-            </main>
+  <head>
+    <meta charset="UTF-8" />
+    <title>AppHub - Fanshawe OER Design Studio</title>
+    <meta author="Jason Benoit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/oer_logo.ico" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="js/index.js"></script>
+  </head>
+  <body onload="startup()">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <button
+          class="sidebar-close"
+          id="close-sidebar"
+          type="button"
+          aria-label="Close menu"
+        >
+          Close
+        </button>
+        <div class="brand" data-reload-home>
+          <span class="side-menu-reload">
+            <img class="brand-logo" src="images/oer_logo.png" alt="" />
+            <span class="brand-text">
+              <span class="brand-title">
+                <span class="brand-title-main">Fanshawe</span>
+                <span class="brand-title-sub">OER Design Studio</span>
+              </span>
+              <span class="brand-subtitle">App Hub</span>
+            </span>
+          </span>
         </div>
-    </body>
+        <nav class="app-nav" aria-label="Applications">
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="AccordionBuilder"
+          >
+            Accordion Builder
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="alt-text-advisor"
+          >
+            Alt Text Advisor
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="AttributionBuilder-Online"
+          >
+            AttributionBuilder
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="BoxChartBuilder"
+          >
+            Box Chart Builder
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/"
+          >
+            DOCX to HTML Converter
+          </button>
+          <button class="app-button" type="button" data-app-url="docx2pb-xml">
+            DOCX to PressbooksXML Converter
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3"
+          >
+            H5P Description Generator
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="h5p-dialog-card-generator"
+          >
+            H5P Dialog Card Generator
+          </button>
+          <button class="app-button" type="button" data-app-url="HTML-Scrubber">
+            HTML Scrubber
+          </button>
+          <button class="app-button" type="button" data-app-url="icon-lab">
+            Icon Lab
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/"
+          >
+            Image Attribution Builder
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="inaturalist-attribution-builder"
+          >
+            iNaturalist Attribution Builder
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/"
+          >
+            OpenStax to Pressbooks XML
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="https://openstax-image-importer-production.up.railway.app/"
+          >
+            OpenStax Image Importer
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="Pressbooks-PDF-LaTeX-Fixer"
+          >
+            PDF LaTeX Fixer
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="ReferencesFormatter"
+          >
+            References Formatter
+          </button>
+          <button
+            class="app-button"
+            type="button"
+            data-app-url="Textbox-Builder"
+          >
+            Textbox Builder
+          </button>
+        </nav>
+      </aside>
+      <main class="content-panel">
+        <div class="mobile-topbar">
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Open app menu"
+          >
+            Menu
+          </button>
+          <button
+            class="mobile-title-button"
+            type="button"
+            data-reload-home
+            aria-label="Reload App Hub home"
+          >
+            <img class="mobile-logo" src="images/oer_logo.png" alt="" />
+            <span class="mobile-title">Fanshawe OER Design Studio App Hub</span>
+          </button>
+        </div>
+        <section class="home-view" aria-label="App Hub home">
+          <div class="home-card">
+            <button
+              class="home-logo-button"
+              type="button"
+              data-reload-home
+              aria-label="Reload App Hub home"
+            >
+              <img
+                class="home-logo"
+                src="images/oer_logo.png"
+                alt="Fanshawe OER Design Studio logo"
+              />
+            </button>
+            <h1 class="home-title">Fanshawe OER Design Studio App Hub</h1>
+            <p class="home-subtitle">
+              Choose a tool to launch it in the workspace. Once opened, you can
+              keep switching between apps from the sidebar.
+            </p>
+            <div class="home-grid">
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="AccordionBuilder"
+              >
+                Accordion Builder
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="alt-text-advisor"
+              >
+                Alt Text Advisor
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="AttributionBuilder-Online"
+              >
+                AttributionBuilder
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="BoxChartBuilder"
+              >
+                Box Chart Builder
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="https://fanshawe-oer-design-studio.github.io/docx-to-html-converter/"
+              >
+                DOCX to HTML Converter
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="docx2pb-xml"
+              >
+                DOCX to PressbooksXML Converter
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="https://h5p-text-description-generator-production-4448.up.railway.app/?v=3"
+              >
+                H5P Description Generator
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="h5p-dialog-card-generator"
+              >
+                H5P Dialog Card Generator
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="HTML-Scrubber"
+              >
+                HTML Scrubber
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="icon-lab"
+              >
+                Icon Lab
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="https://pressbooks-image-attributionbuilder-production.up.railway.app/"
+              >
+                Image Attribution Builder
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="inaturalist-attribution-builder"
+              >
+                iNaturalist Attribution Builder
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="https://openstax-to-pressbooks-xml-production.up.railway.app/"
+              >
+                OpenStax to Pressbooks XML
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="https://openstax-image-importer-production.up.railway.app/"
+              >
+                OpenStax Image Importer
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="Pressbooks-PDF-LaTeX-Fixer"
+              >
+                PDF LaTeX Fixer
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="ReferencesFormatter"
+              >
+                References Formatter
+              </button>
+              <button
+                class="home-app-button"
+                type="button"
+                data-app-url="Textbox-Builder"
+              >
+                Textbox Builder
+              </button>
+            </div>
+          </div>
+        </section>
+        <iframe id="main-frame" src="about:blank" title="App viewer"></iframe>
+      </main>
+    </div>
+  </body>
 </html>
-
-
-
-
-
